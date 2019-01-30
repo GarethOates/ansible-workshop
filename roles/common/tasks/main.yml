@@ -1,0 +1,20 @@
+---
+ - name: Create Folder
+   win_file:
+    path: C:\Install
+    state: directory
+
+ - name: Install desired applications
+   win_chocolatey:
+      name: "{{ item }}"
+      state: present
+   with_items:
+        - windirstat
+        - googlechrome
+        - 7zip
+
+ - name: Setup Development Folders
+   win_file:
+    path: C:\Development
+    state: directory
+   tags: devs
