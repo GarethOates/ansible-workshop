@@ -4,17 +4,37 @@
     path: C:\Install
     state: directory
 
- - name: Install desired applications
+ - name: Install common applications
    win_chocolatey:
       name: "{{ item }}"
       state: present
    with_items:
-        - windirstat
-        - googlechrome
-        - 7zip
+    - "{{ applications }}"
 
- - name: Setup Development Folders
-   win_file:
-    path: C:\Development
-    state: directory
-   tags: devs
+ - name: Copy web.config file to Development area
+   win_copy:
+       src: web.config
+       dest: "{{ developerPath }}\\web.config"
+
+ - name: Only Copy config.xml template to Development area on windows
+   win_template:
+       src: config.xml
+       dest: "{{ developerPath }}\\gareth.xml"
+   tags: current
+   when: ansible_os_family | search('Windows')
+
+ - name: Check if WebClient service exists
+   win_service:
+    name: WebClient
+   register: webserviceresult
+
+ - name: See variable output
+   debug:
+    msg: "{{ webserviceresult }}"
+
+ - name: Ensure WebClient is started
+   win_service:
+    name: WebClient
+    state: started
+   when: webserviceresult.exists == true
+

@@ -1,0 +1,12 @@
+---
+- name: Install Visual Studio Code
+  win_chocolatey:
+    name: vscode
+    state: present
+
+- name: Setup Development Folders
+  win_file:
+   path: "{{ developerPath }}"
+   state: directory
+  notify:
+   - Reboot Server

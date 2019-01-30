@@ -1,6 +1,10 @@
 ---
   - hosts: windows
-    gather_facts: no
+    gather_facts: yes
     roles:
       - common
-
+    pre_tasks:
+      - name: Runs before roles
+        win_service:
+          name: WebClient
+          state: stopped

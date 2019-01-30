@@ -1,0 +1,5 @@
+<hostname>
+    {{ ansible_host }}
+    {{ ansible_distribution }}
+    {{ ansible_powershell_version }}
+</hostname>
