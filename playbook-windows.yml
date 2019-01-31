@@ -4,7 +4,7 @@
     roles:
       - common
     pre_tasks:
-      - name: Runs before roles
+      - name: Stop webclient service
         win_service:
           name: WebClient
           state: stopped
