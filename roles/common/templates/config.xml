@@ -1,5 +1,5 @@
-<hostname>
-    {{ ansible_host }}
-    {{ ansible_distribution }}
-    {{ ansible_powershell_version }}
-</hostname>
+<variables>
+    <host>{{ ansible_host }}</host>
+    <distribution>{{ ansible_distribution }}</distribution>
+    <powershellVersion>{{ ansible_powershell_version }}</powershellVersion>
+</variables>
